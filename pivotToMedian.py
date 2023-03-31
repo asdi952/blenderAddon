@@ -52,9 +52,10 @@ class SetPivotToMedian(bpy.types.Operator):
             median /= len( selected_verts)
 
 
-            offsetPos = Matrix.Translation( obj.matrix_world @ median)
+            offsetPos = obj.matrix_world @ Matrix.Translation(  median)
             obj.data.transform( Matrix.Translation( -median))
-            obj.location += median
+            obj.matrix_world = offsetPos
+            #obj.location += median
 
             print(median)
             
